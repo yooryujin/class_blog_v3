@@ -4,6 +4,7 @@ import com.tenco.blog.user.User;
 import com.tenco.blog.util.MyDateUtil;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +16,8 @@ import java.sql.Timestamp;
 @Table(name = "board_tb") // 데이터베이스에서 테이블 이름을 지정해줌(찾음)
 // @Entity : JPA 가 이 클래스를 데이터베이스 테이블과 맵핑하는 객체(엔티티)로 인식
 @Entity
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor // JPA 에서 엔티티는 기본 생성자가 필요
 public class Board {
 

@@ -1,8 +1,9 @@
 package com.tenco.blog.board;
 
-import jakarta.persistence.Entity;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,22 @@ import java.util.List;
 @RequiredArgsConstructor // 생성자 자동 생성 + 멤버 변수 -> DI 처리 됨
 public class BoardRepository {
 
+    // DI
     private final EntityManager entityManager;
+
+    /**
+     *  게시글 저장 : User 와 연관관계를 가진 Board 엔티티 영속화
+     * @param board
+     * @return
+     */
+    @Transactional
+    public Board save(Board board) {
+        // 비영속 상태의 Board Object 를 영속성 컨텍스트에 저장하면
+        entityManager.persist(board);
+        // 이후 시점에는 사실 같은 메모리 주소를 가리킴
+        return board;
+    }
+
 
     /*
     * 전체 게시글 조회
